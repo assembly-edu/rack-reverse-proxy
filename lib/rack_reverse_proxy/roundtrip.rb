@@ -253,7 +253,9 @@ module RackReverseProxy
     end
 
     def headers
-      Rack::Proxy.extract_http_request_headers(source_request.env)
+      headers = Rack::Proxy.extract_http_request_headers(source_request.env)
+      headers.delete('VERSION')
+      headers
     end
 
     def matches
